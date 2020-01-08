@@ -431,7 +431,7 @@ body {
 
 @media screen and (max-width: 1200px) {
   .wrap {
-    width: 96%;
+    width: 100%;
   }
 
 }
@@ -458,9 +458,11 @@ body {
   }
 
   .wrap {
+    width: 100%;
+  }
+  .header-container .wrap{
     width: 90%;
   }
-
   .article-list {
     .list-content {
       width: 100%;
