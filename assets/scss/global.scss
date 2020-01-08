@@ -593,6 +593,15 @@ body {
     }
   }
 }
+@media screen and (max-width:400px) {
+  .search-content{
+    width: 50%;
+    margin: 0 10px;
+  }
+  .mobile-hide{
+    display: none;
+  }
+}
 //bootstrap小工具
 
 .w-25 {

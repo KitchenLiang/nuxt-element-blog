@@ -364,10 +364,10 @@ $headerHeight: 60px;
 
     .logo {
       .headerlogo{
-        width: 91px;
-        height: 22px;
+        width: 80px;
       }
     }
   }
 }
+
 </style>
