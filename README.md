@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+
+
 ``` bash
 # install dependencies
 $ yarn install
@@ -20,3 +22,13 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+page
+
+mobile
+
+![image.png](https://github.com/KitchenLiang/nuxt-element-blog/blob/KitchenLiang-patch-1/QQ%E6%88%AA%E5%9B%BE20200108144117.png)
+
+pc
+
+![image.png](https://github.com/KitchenLiang/nuxt-element-blog/blob/KitchenLiang-patch-1/QQ%E6%88%AA%E5%9B%BE20200108142837.png)
