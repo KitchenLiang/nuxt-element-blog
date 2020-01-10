@@ -45,7 +45,22 @@
     },
     head() {
       return {
-        title: this.$route.query.title
+        title: `搜索 - ${this.info.blog_title}`,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.info.seo_description
+          }, {
+            hid: 'author',
+            name: 'author',
+            content: this.info.blog_title
+          }, {
+            hid: 'applemobileweapptitle',
+            name: 'apple-mobile-web-app-title',
+            content: this.info.blog_title
+          }
+        ]
       }
     },
     data() {

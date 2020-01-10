@@ -18,14 +18,12 @@
 <script>
 import AppHeader from '~/components/AppHeader'
 import AppFooter from '~/components/AppFooter'
-import AppSidebar from '~/components/AppSidebar'
 import { mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppFooter,
-    AppSidebar
   },
   computed: {
     ...mapState(['menuStatus'])

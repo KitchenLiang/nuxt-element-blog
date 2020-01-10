@@ -360,7 +360,8 @@ body {
   // 标题
   .title {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-weight:400;
+    font-size: 1.2rem;
     @extend %ellipsis;
     width: 100%;
     a {
@@ -448,7 +449,10 @@ body {
     }
   }
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
+  html{
+    font-size: 14px;
+  }
   .phone-show {
     display: block;
   }

@@ -11,8 +11,7 @@
               <div class="AuthorInfo-detail">{{ $moment(detail.createTime).format("YYYY年MM月DD日") }} 阅读{{detail.visits}}</div>
             </div>
           </div>
-          <el-image :src="detail.thumbnail">
-          </el-image>
+          <img style="width: 100%" :src="detail.thumbnail" v-if="detail.thumbnail">
           <h1 class="title">{{detail.title}}</h1>
           <div class="content-details" ref="articleContent" v-html="detail.formatContent"></div>
           <div class="tag-list-box">
@@ -25,7 +24,6 @@
               </li>
             </ul>
           </div>
-
         </article>
 
         <!-- 文章内容结束 -->
@@ -42,6 +40,7 @@
   </div>
 
 </template>
+
 <script>
   import {
     mapState,
@@ -52,13 +51,9 @@
   import Share from '@/components/Share/index.vue'
   export default {
     name: 'Details',
-    fetch({
-      params,
-      error,
-      store
-    }) {
-      store.dispatch('article/getProfile')
-      return store.dispatch('article/getArticleDetail', params.id)
+    async fetch({params,error,store}){
+      await store.dispatch('article/getProfile');
+      await store.dispatch('article/getArticleDetail',params.id);
     },
     components: {
       haloComment,
@@ -67,31 +62,6 @@
     },
     data() {
       return {
-        isShowReward: false,
-        isShowPoster: false,
-        fullPath: '',
-        rewardContent: {},
-        posterContent: {},
-        authorOtherInfo: {
-          github: {
-            icon: 'github-fill'
-          },
-          qq: {
-            icon: 'QQ-circle-fill'
-          },
-          wechatNum: {
-            icon: 'wechat-fill'
-          },
-          sina: {
-            icon: 'weibo-circle-fill'
-          },
-          email: {
-            icon: 'mail-fill'
-          }
-        },
-        drawer: false,
-        srcList: [],
-        showViewer: false,
       }
     },
     computed: {
@@ -99,19 +69,25 @@
       ...mapState('article', ['detail', 'viewCount', 'opinion', 'profile'])
     },
     head() {
-      let keywords = []
-      this.detail.tags && this.detail.tags.forEach(item => keywords.push(item.name))
       return {
         title: `${this.detail.title} - ${this.info.blog_title}`,
-        meta: [{
-            hid: 'keywords',
-            name: 'keywords',
-            content: keywords.join(',')
-          },
+        link: [
+          {  rel:"stylesheet",href:'https://cdn.bootcss.com/highlight.js/9.15.10/styles/monokai.min.css' },
+          {  rel:"stylesheet",href:'https://cdn.bootcss.com/viewerjs/1.3.7/viewer.min.css' },
+        ],
+        meta: [
           {
             hid: 'description',
             name: 'description',
             content: this.detail.summary
+          }, {
+            hid: 'author',
+            name: 'author',
+            content: this.profile.nickname
+          }, {
+            hid: 'applemobileweapptitle',
+            name: 'apple-mobile-web-app-title',
+            content: this.info.blog_title
           }
         ],
       }
@@ -137,35 +113,24 @@
         text: window.location.href
       });
 
+      $(function(){
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+        const gallery = new Viewer(document.querySelector('.content-details'));
+        })
+
+
     },
     beforeDestroy() {
-
 
     },
     methods: {
       ...mapActions('article', ['updateOpinion']),
-
-
-      // 显示微信号码
-      _showWechatNum(num) {
-        this.$message({
-          message: `微信号：${num}`,
-          showClose: true,
-          showImg: true,
-          center: true,
-          wrapCenter: true,
-          width: 280,
-          imgUrl: this.detail.articleInfor.other.wechatPic,
-          duration: 0
-        })
-      },
-
-
-
     }
   }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   .section {
     margin-top: $container-margin;
     padding: $container-padding;
@@ -174,15 +139,16 @@
   }
 
   .article {
+    font-size: 1rem;
     margin-top: 0;
     -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .3);
     box-shadow: 0 1px 3px rgba(26, 26, 26, .3);
 
     .title {
       padding: 10px 0;
-      font-size: 20px;
       text-align: center;
       font-weight: 600;
+      font-size: 2rem;
     }
 
     .other-info {
@@ -220,13 +186,13 @@
 
       /deep/ h1,
       /deep/ h2 {
-        font-size: $font-size-large;
+        font-size: 1.4rem;
       }
 
       /deep/ h4,
       /deep/ h5,
       /deep/ h6 {
-        font-size: $font-size-small;
+        font-size: 1.2rem;
       }
 
       /deep/ img {
@@ -429,6 +395,7 @@
   }
 
   @media screen and (max-width:767px) {
+
     .opinion {
       justify-content: space-between;
 

@@ -45,7 +45,22 @@
     },
     head() {
       return {
-        title: `分类“${this.$route.params.id}”的文章 | ${this.info.blogName}`
+        title: `${this.$route.query.name}的文章 - ${this.info.blog_title}`,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.info.seo_description
+          }, {
+            hid: 'author',
+            name: 'author',
+            content: this.info.blog_title
+          }, {
+            hid: 'applemobileweapptitle',
+            name: 'apple-mobile-web-app-title',
+            content: this.info.blog_title
+          }
+        ]
       }
     },
     data() {

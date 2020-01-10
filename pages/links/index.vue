@@ -4,10 +4,12 @@
       <div class="container">
         <div class="links-box p-3" >
           <div class="links-card" v-for="(links, index) in friendlinks" :key="links.key">
-            <a :href="links.url" target="_blank" class="thumbnail-wrap">
-              <img :src="links.logo" class="thumbnail" alt="">
-            </a>
-            <div class="links-title">{{links.name}}</div>
+            <div class="links-card-border">
+              <a :href="links.url" target="_blank" class="thumbnail-wrap">
+                <img :src="links.logo" class="thumbnail" alt="">
+              </a>
+              <div class="links-title">{{links.name}}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -40,7 +42,7 @@
     },
     head() {
       return {
-        title: `${this.info.blog_title}`,
+        title: `友链-${this.info.blog_title}`,
         meta: [{
             name: 'keywords',
             content: this.info.seo_keywords
@@ -81,13 +83,19 @@
     min-height: 80vh;
     align-content: flex-start;
     .links-card{
-      width: 30%;
-      margin: 1.5%;
-      border: 1px solid $color-main-background;
-      border-radius: $border-radius;
-      height: 150px;
+      width: 33.3%;
+      min-width: 33.3%;
+      max-width: 33.3%;
+      padding: 0.5rem;
+      flex: 1;
+      box-sizing: border-box;
+      .links-card-border{
+        border: 1px solid $color-border;
+        border-radius: $border-radius;
+      }
     }
     .links-title{
+      padding: 0.3rem;
       text-align: center;
       @include ellipsisMultiline(1, 2);
     }
@@ -108,5 +116,17 @@
        -webkit-transform: translate3d(-50%, -50%, 0);
        transform: translate3d(-50%, -50%, 0);
      }
+  }
+  @media screen and (max-width:767px) {
+    .links-box{
+    .links-card{
+      width: 50%;
+      min-width: 50%;
+      max-width: 50%;
+    }
+    }
+    .thumbnail-wrap{
+      height: 90px;
+    }
   }
 </style>

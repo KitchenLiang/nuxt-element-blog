@@ -47,15 +47,19 @@
     head() {
       return {
         title: `${this.info.blog_title}`,
-        meta: [{
-            hid: 'keywords',
-            name: 'keywords',
-            content: this.info.seo_keywords
-          },
+        meta: [
           {
             hid: 'description',
             name: 'description',
             content: this.info.seo_description
+          }, {
+            hid: 'author',
+            name: 'author',
+            content: this.info.blog_title
+          }, {
+            hid: 'applemobileweapptitle',
+            name: 'apple-mobile-web-app-title',
+            content: this.info.blog_title
           }
         ]
       }

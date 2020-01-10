@@ -13,3 +13,4 @@ Vue.prototype.$changenum=function(num){
     return (num/10000).toFixed(1)+'w';
   }
 }
+

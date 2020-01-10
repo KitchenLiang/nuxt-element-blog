@@ -88,14 +88,12 @@ export const actions = {
   // 获取文章详情
   async getArticleDetail ({ commit, rootState }, id) {
     try {
-      const domainRegexp = /(https?:\/\/([a-z\d-]\.?)+(:\d+)?)?(\/.*)/gi
       let { data } = await this.$axios.$get(`${process.env.baseUrl}/api/content/posts/${id.replace(".html","")}?formatDisabled=false`,{
         headers:process.env.Authorization
-      })
-
-      commit(SET_ARTICLE_DETAIL, data.data)
-      commit(update_Likes, data.data.likes)
-      this.$axios.$get(`${process.env.baseUrl}/archives/${data.data.url}`);//增加浏览量
+      });
+      commit(SET_ARTICLE_DETAIL, data.data);
+      commit(update_Likes, data.data.likes);
+      this.$axios.$get(`${process.env.baseUrl}/archives/${encodeURI(data.data.url)}`);//增加浏览量
       return Promise.resolve(data)
     } catch (error) {
       return Promise.reject(error)

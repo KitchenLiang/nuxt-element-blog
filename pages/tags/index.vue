@@ -14,12 +14,33 @@
 </template>
 
 <script>
+  import {
+    mapState
+  } from 'vuex'
 export default {
   name: 'Page',
   layout: 'page',
+  computed: {
+    ...mapState(['info']),
+  },
   head () {
     return {
-      title: `标签云 | ${this.$store.state.info.blogName}`
+      title: `标签云 - ${this.info.blog_title}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.info.seo_description
+        }, {
+          hid: 'author',
+          name: 'author',
+          content: this.info.blog_title
+        }, {
+          hid: 'applemobileweapptitle',
+          name: 'apple-mobile-web-app-title',
+          content: this.info.blog_title
+        }
+      ]
     }
   }
 }
