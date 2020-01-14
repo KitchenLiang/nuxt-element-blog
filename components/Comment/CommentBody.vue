@@ -16,11 +16,10 @@
 </template>
 
 <script>
-  import CommentNode from './CommentNode'
+
 export default {
   name: 'CommentBody',
   components: {
-    CommentNode,
   },
   props: {
     comments: {

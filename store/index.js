@@ -1,9 +1,12 @@
-import {UPDATE_GLOBAL_INFO, UPDATE_ERROR_MESSAGE, UPDATE_MENU_STATUS, set_links} from './mutations-types'
+import {UPDATE_GLOBAL_INFO, UPDATE_ERROR_MESSAGE, UPDATE_MENU_STATUS, set_links,set_journal,set_journal_list,clear_journal_list} from './mutations-types'
 
 export const state = () => ({
   info: {},
   menu: {},
+  viewergallery: {},
   friendlinks:[],
+  journals:{},
+  journal_list:[],
   subMenu: {},
   errorInformation: {
     code: '',
@@ -26,9 +29,19 @@ export const mutations = {
 
   [UPDATE_MENU_STATUS] (state, flag) {
     state.menuStatus = flag
+    state.viewergallery = {}
   },
   [set_links] (state, data) {
     state.friendlinks = data
+  },
+  [set_journal] (state, data) {
+    state.journals = data
+  },
+  [set_journal_list] (state, data) {
+    state.journal_list =  state.journal_list.concat(data.content)
+  },
+  [clear_journal_list] (state, data) {
+    state.journal_list =  []
   },
 }
 
@@ -53,7 +66,7 @@ export const actions = {
         info: info.data,
         menu: menu.data,
         tags:tags,
-        categories:categories
+        categories:categories,
       }
       // console.log(tags)
       commit(UPDATE_GLOBAL_INFO, result)
@@ -70,6 +83,19 @@ export const actions = {
         headers:process.env.Authorization
       })
       commit(set_links, data.data)
+      return Promise.resolve(data)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  },
+  async getjournal ({ commit }, requestData) {
+    try {
+      let { data } = await this.$axios.$get(`${process.env.baseUrl}/api/content/journals`, {
+        params: requestData,
+        headers:process.env.Authorization
+      })
+      commit(set_journal, data.data);
+      commit(set_journal_list, data.data);
       return Promise.resolve(data)
     } catch (error) {
       return Promise.reject(error)

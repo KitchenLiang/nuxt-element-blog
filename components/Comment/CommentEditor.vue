@@ -162,7 +162,7 @@ export default {
   computed: {
     avatar() {
       if (!this.comment.email||!this.validEmail(this.comment.email)) {
-        return '//secure.gravatar.com/avatar?d=retro'
+        return `//secure.gravatar.com/avatar?d=` + this.options.comment_gravatar_default
       }
       const gravatarMd5 = md5(this.comment.email)
       return `//secure.gravatar.com/avatar/${gravatarMd5}?s=256&d=`

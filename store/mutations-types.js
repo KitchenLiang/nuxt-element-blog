@@ -53,6 +53,9 @@ export const set_profile = 'set_profile'
 export const update_Likes = 'update_Likes'
 // 友链
 export const set_links = 'set_links'
+export const set_journal = 'set_journal'
+export const set_journal_list = 'set_journal_list'
+export const clear_journal_list = 'clear_journal_list'
 // 文章发表意见
 export const UPDATE_OPINION = 'UPDATE_OPINION'
 export const UPDATE_OPINION_LOADING = 'UPDATE_OPINION_LOADING'

@@ -96,12 +96,11 @@
 </template>
 
 <script>
-  import CommentAuthor from './CommentAuthor'
-  import CommentBody from './CommentBody'
-  import CommentNode from './CommentNode'
-  import CommentEditor from './CommentEditor'
-  import CommentLoading from './CommentLoading'
-  import Pagination from './Pagination'
+  import CommentAuthor from '@/components/Comment/CommentAuthor'
+  import CommentBody from '@/components/Comment/CommentBody'
+  import CommentEditor from '@/components/Comment/CommentEditor'
+  import CommentLoading from '@/components/Comment/CommentLoading'
+  import Pagination from '@/components/Comment/Pagination'
 import commentApi from './apis/comment'
 import optionApi from './apis/option'
 import { isObject } from './utils/util'
@@ -111,7 +110,6 @@ export default {
   components: {
     CommentAuthor,
     CommentBody,
-    CommentNode,
     CommentEditor,
     CommentLoading,
     Pagination
@@ -261,7 +259,6 @@ export default {
 <style>
   .halo-comment{
     background: #ffffff;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.3);
   }
   .halo-comment * {
     font-family: -apple-system, BlinkMacSystemFont, "System Latin", "System Emoji", "System SC", sans-serif;

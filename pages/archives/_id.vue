@@ -28,7 +28,7 @@
 
         <!-- 文章内容结束 -->
 
-        <halo-comment :id="+this.$route.params.id.replace('.html','')" type="post"></halo-comment>
+        <halo-comment class="cardshadow" :id="+this.$route.params.id.replace('.html','')" type="post"></halo-comment>
 
         <!--分享-->
         <Share></Share>
@@ -62,6 +62,7 @@
     },
     data() {
       return {
+        viewer:{}
       }
     },
     computed: {
@@ -73,7 +74,7 @@
         title: `${this.detail.title} - ${this.info.blog_title}`,
         link: [
           {  rel:"stylesheet",href:'https://cdn.bootcss.com/highlight.js/9.15.10/styles/monokai.min.css' },
-          {  rel:"stylesheet",href:'https://cdn.bootcss.com/viewerjs/1.3.7/viewer.min.css' },
+
         ],
         meta: [
           {
@@ -117,9 +118,11 @@
         document.querySelectorAll('pre code').forEach((block) => {
           hljs.highlightBlock(block);
         });
-        const gallery = new Viewer(document.querySelector('.content-details'));
+        if(this.viewer){
+          this.viewer.destroy();//Destroy the viewer and remove the instance.
+        }
+        this.viewer= new Viewer(document.querySelector('.content-details'))
         })
-
 
     },
     beforeDestroy() {
@@ -141,8 +144,7 @@
   .article {
     font-size: 1rem;
     margin-top: 0;
-    -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .3);
-    box-shadow: 0 1px 3px rgba(26, 26, 26, .3);
+    box-shadow: $box-shadow;
 
     .title {
       padding: 10px 0;

@@ -12,17 +12,8 @@
     <div class="comment-item-main">
       <div class="comment-item-header">
         <span class="header-author">
-          <a
-            v-if="urlValid"
-            :href="comment.authorUrl"
-            target="_blank"
-            v-text="comment.author"
-          />
-          <a
-            v-else
-            href="javascript:void(0)"
-            v-text="comment.author"
-          />
+          <a v-if="urlValid" :href="comment.authorUrl" target="_blank" v-text="comment.author"></a>
+          <a v-else href="javascript:void(0)" v-text="comment.author"></a>
         </span>
         <span v-if="comment.isAdmin" class="header-admin">博主</span>
         <span class="header-time">{{createTimeAgo}}</span>
@@ -75,7 +66,7 @@
         :target="target"
         :options="options"
         @reply="handleChildReply"
-      />
+      ></comment-body>
     </div>
   </div>
 </template>
@@ -83,10 +74,15 @@
 <script>
 import { timeAgo, isUrl } from './utils/util'
 import marked from 'marked'
-import commentApi from './apis/comment'
+import commentApi from '@/components/Comment/apis/comment'
+import CommentLoading from '@/components/Comment/CommentLoading'
 
 export default {
   name: 'CommentNode',
+  components: {
+    CommentLoading,
+
+  },
   props: {
     comment: {
       type: Object,
@@ -120,7 +116,7 @@ export default {
   },
   computed: {
     avatar() {
-      return `//secure.gravatar.com/avatar/${this.comment.gravatarMd5}?s=256&d=retro`
+      return `//secure.gravatar.com/avatar/${this.comment.gravatarMd5}?s=256&d=` + this.options.comment_gravatar_default
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

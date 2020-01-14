@@ -20,6 +20,7 @@ export default {
     ],
     link: [
       {  hid: 'icon',rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {  rel:"stylesheet",href:'https://cdn.bootcss.com/viewerjs/1.3.7/viewer.min.css' },
     ],
     script:[
       // 加入百度统计js，使用时自行添加为自己的
@@ -104,6 +105,6 @@ export default {
   env:{
     localurl:'http://localhost:8090/',
     baseUrl:'/api',
-    Authorization:{'API-Authorization':'123456'},
+    Authorization:{'API-Authorization':'1'},
   }
 }
