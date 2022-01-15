@@ -16,7 +16,7 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "babel-loader": "^8.0.6",
     "element-ui": "^2.4.11",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
